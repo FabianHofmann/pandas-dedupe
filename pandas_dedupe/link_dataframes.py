@@ -132,8 +132,10 @@ def link_dataframes(dfa, dfb, field_properties, config_name="link_dataframes", n
     dfb = dfb.merge(df_linked_records, on='dfb_link', how='left')
 
     #Concatenate results from dfa + dfb
-    df_final = dfa.append(dfb, ignore_index=True, sort=True)
+
+    df_final = pd.concat([dfa, dfb], ignore_index=True, sort=True)
     df_final = df_final.sort_values(by=['cluster id'])
     df_final = df_final.drop(columns=['dfa_link','dfb_link'])
+
 
     return df_final
